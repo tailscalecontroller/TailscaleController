@@ -1,0 +1,136 @@
+1st Step, sign into Tailscale accounts and also set nicknames for profiles. 
+
+Sign into one account then 
+sudo tailscale set --nickname="nickname here"
+Tailscale sudo login
+Sign into one account then 
+sudo tailscale set --nickname="nickname here"
+
+Then after install add those nicknames to Tailscale GUI App then you will be able to switch between accounts. 
+
+
+TAILSCALE GUI - SETUP GUIDE
+============================
+
+Complete setup instructions for installing and configuring Tailscale GUI on a new computer.
+
+QUICK SETUP (Copy & Paste All Commands)
+========================================
+
+Step 1: Install Tailscale
+--------------------------
+curl -fsSL https://tailscale.com/install.sh | sh
+
+Step 2: Install Python Dependencies
+------------------------------------
+sudo apt-get update
+sudo apt-get install -y python3-gi python3-gi-cairo gir1.2-gtk-4.0 python3-pip
+
+Step 3: Install Python Package Dependencies
+-------------------------------------------
+cd ~/tailscale-gui
+pip3 install -r requirements.txt
+
+Step 4: Make Scripts Executable
+--------------------------------
+cd ~/tailscale-gui
+chmod +x tailscale_gui.py
+chmod +x setup-permissions.sh
+chmod +x install.sh
+
+Step 5: Set Up Permissions (IMPORTANT - Run Once)
+--------------------------------------------------
+This allows the app to switch Tailscale profiles without entering your password each time.
+
+Option A: Automated Setup (Recommended)
+./setup-permissions.sh
+
+Option B: Manual Setup
+sudo tailscale set --operator=$USER
+sudo systemctl restart tailscaled
+
+Option C: Passwordless Sudo (Alternative)
+echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/tailscale switch *" | sudo tee /etc/sudoers.d/tailscale-gui
+sudo chmod 0440 /etc/sudoers.d/tailscale-gui
+
+Step 6: (Optional) Install Desktop Entry
+-----------------------------------------
+To add the application to your application menu:
+
+./install.sh
+
+Or manually:
+cp ~/tailscale-gui/tailscale-gui.desktop ~/.local/share/applications/
+update-desktop-database ~/.local/share/applications/
+
+RUNNING THE APPLICATION
+========================
+
+Method 1: Run directly
+-----------------------
+cd ~/tailscale-gui
+python3 tailscale_gui.py
+
+Method 2: Run as executable
+----------------------------
+cd ~/tailscale-gui
+./tailscale_gui.py
+
+Method 3: From application menu
+--------------------------------
+After installing the desktop entry, search for "Tailscale Controller" in your application menu.
+
+FIRST TIME SETUP
+================
+
+1. Add Profile Nicknames: Click the "+" button to add your Tailscale profile nicknames
+2. Switch Profiles: Click any nickname button to switch to that Tailscale account
+3. View Devices: The device list automatically shows all devices in your current Tailscale network
+
+TROUBLESHOOTING
+===============
+
+"Tailscale is not installed" Error:
+curl -fsSL https://tailscale.com/install.sh | sh
+
+"Permission denied" when switching profiles:
+cd ~/tailscale-gui
+./setup-permissions.sh
+
+GTK4 Not Found:
+sudo apt-get install gir1.2-gtk-4.0
+
+App doesn't appear in menu:
+cd ~/tailscale-gui
+./install.sh
+
+COMPLETE INSTALLATION SCRIPT (All-in-One)
+=========================================
+
+Copy and paste this entire block to install everything at once:
+
+curl -fsSL https://tailscale.com/install.sh | sh
+sudo apt-get update
+sudo apt-get install -y python3-gi python3-gi-cairo gir1.2-gtk-4.0 python3-pip
+cd ~/tailscale-gui
+pip3 install -r requirements.txt
+chmod +x tailscale_gui.py setup-permissions.sh install.sh
+./setup-permissions.sh
+./install.sh
+
+NOTES
+=====
+
+- The app stores profile nicknames in ~/.config/tailscale-gui/profiles.json
+- Profile nicknames are saved between sessions
+- The app auto-refreshes device list every 5 seconds
+- Version number is displayed in the lower left corner of the GUI
+
+SUPPORT
+=======
+
+If you encounter issues:
+1. Check that Tailscale is installed and running: tailscale status
+2. Verify permissions are set: tailscale switch --list (should work without sudo)
+3. Check Python dependencies: python3 -c "import gi; gi.require_version('Gtk', '4.0')"
+

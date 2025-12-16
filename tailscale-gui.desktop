@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Tailscale Controller
+Comment=Control Tailscale, switch accounts, and view devices
+Exec=python3 %k/tailscale_gui.py
+Icon=network-workgroup
+Terminal=false
+Categories=Network;Utility;
+Path=%k
+
