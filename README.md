@@ -7,6 +7,9 @@ A modern, user-friendly Linux GUI application for managing Tailscale connections
 ![GTK](https://img.shields.io/badge/GTK-4.0-purple)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
+<img width="786" height="812" alt="image" src="https://github.com/user-attachments/assets/d179f45c-bedc-475a-9cb5-32c20fbc7030" />
+
+
 ## 🚀 Features
 
 - **🔐 Account Management**: Easily switch between different Tailscale accounts and profiles
