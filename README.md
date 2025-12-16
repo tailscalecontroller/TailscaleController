@@ -2,6 +2,9 @@
 
 A modern, user-friendly Linux GUI application for managing Tailscale connections, switching between accounts, and monitoring your Tailscale network.
 
+If this helped you with Tailscale on Linux please donate Bitcoin here:
+bc1qw4tc6jxpykj45wlsfc28ehyqf7ww254766qw3s
+
 ![Tailscale Controller](https://img.shields.io/badge/Tailscale-GUI%20Controller-blue)
 ![Python](https://img.shields.io/badge/Python-3.8+-green)
 ![GTK](https://img.shields.io/badge/GTK-4.0-purple)
